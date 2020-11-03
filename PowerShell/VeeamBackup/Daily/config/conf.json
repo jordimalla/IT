@@ -1,0 +1,9 @@
+{
+	"webhook": "yourURI_TeamsChanel",
+	"service_name": "Veeam B&R",
+	"icon_url": "https://raw.githubusercontent.com/tigattack/VeeamSlackNotifications/master/asset/img/icon/VeeamB%26R.png",
+	"debug_log": true,
+	"icon_warning": "https://img.icons8.com/emoji/48/000000/warning-emoji.png",
+	"icon_ok" : "https://img.icons8.com/color/48/000000/thumb-up.png",
+	"icon_fail" : "https://img.icons8.com/color/48/000000/poor-quality--v1.png"
+}
