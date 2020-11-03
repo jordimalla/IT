@@ -1,4 +1,6 @@
-#Add in DockerFile
+# Time Zone Date
+
+## Add in DockerFile
 COPY pre-conf.sh /sbin/tzDateConfigure.sh
 RUN chmod +x /sbin/tzDateConfigure.sh; sync \
     && /bin/bash -c /sbin/tzDateConfigure.sh \
