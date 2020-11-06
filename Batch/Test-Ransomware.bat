@@ -61,7 +61,7 @@ for /L %%i IN (0,1,%num_dir%) DO (
     mkdir Directory_0%%i
     cd Directory_0%%i
     for /L %%e IN (0,1,%num_files%) DO (
-        echo Text of test file. > File_%%e
+        echo Text of test file. > File_%%e.txt
     )
     cd ..
 )
