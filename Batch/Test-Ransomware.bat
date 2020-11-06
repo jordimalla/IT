@@ -1,7 +1,7 @@
 @echo off
 :: add other test for the arguments here...
 if not [%1]==[] goto main
-else goto showMainHelp
+goto showMainHelp
 
 :exit
 exit /B 1
