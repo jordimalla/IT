@@ -1,0 +1,18 @@
+{
+    "Temp_Backup": "Directory_Backup_temp",
+    "Backup_Path_Dairly": "\\\\Directory_Backup_Dairly",
+    "Backup_Path_Friday": "\\\\Directory_Backup_Friday",
+    "Backup_Path_Historic": "\\\\Directory_Backup_Historic",
+    "User": "User_Directory_Backup_Acces",
+    "Pass": "Password_Directory_Backup_Acces",
+    "DaysKeepBackupDairly": 5,
+    "DaysKeepBackupFriday": 1,
+    "DaysKeepBackupHistoric": 30,
+    "DaysKeepLogFiles": 5,
+    "ExtensionBackup": "bak",
+    "Debug_Log": true,
+	"Path_Log": "Directory_Logs",
+    "Webhook": "URL_Teams_Webhook",
+    "icon_ok" : "https://img.icons8.com/color/48/000000/thumb-up.png",
+	  "icon_fail" : "https://img.icons8.com/color/48/000000/poor-quality--v1.png"
+}
