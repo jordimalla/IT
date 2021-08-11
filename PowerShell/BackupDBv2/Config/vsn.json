@@ -1,0 +1,21 @@
+{
+  "SqlServer": "serverName",
+	"DBsToBackup": "DBToBackup1,DBToBackup2",
+  "Temp_Backup": "FolderToTempBackup",
+  "Backup_Path_Dairly": "FolderToBackupDairlyMoToTu",
+  "Backup_Path_Friday": "FolderToBackupFr",
+  "Backup_Path_Historic": "FolderToBackupHis",
+  "User": "UserToBackupPathAccess",
+  "Pass": "PassToBackupPathAccess",
+  "DaysKeepBackupDairly": 5,
+  "DaysKeepBackupFriday": 1,
+  "DaysKeepBackupHistoric": 30,
+  "DaysKeepLogFiles": 5,
+  "ExtensionBackup": "bak",
+  "Debug_Log": true,
+	"Path_Log": "FolderToSaveLogs",
+  "Webhook": "TeamsURLWebHook",
+  "icon_ok" : "https://img.icons8.com/color/48/000000/thumb-up.png",
+	"icon_fail" : "https://img.icons8.com/color/48/000000/poor-quality--v1.png",
+	"proxy": "InternalProxy"
+}
