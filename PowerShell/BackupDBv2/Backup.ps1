@@ -227,9 +227,9 @@ Write-Info "Process starts"
 $BackupState = "Ok"
 try {
 	switch ($type){
-		"Viernes" { DeleteOldAndBackupDB $config.Backup_Path_Friday $config.DaysKeepBackupFriday $config.ExtensionBackup }
-		"Semanal" { DeleteOldAndBackupDB $config.Backup_Path_Dairly $config.DaysKeepBackupDairly $config.ExtensionBackup }
-		"Historico" { DeleteOldAndBackupDB $config.Backup_Path_Historic $config.DaysKeepBackupHistoric $config.ExtensionBackup }
+		"Friday" { DeleteOldAndBackupDB $config.Backup_Path_Friday $config.DaysKeepBackupFriday $config.ExtensionBackup }
+		"Week" { DeleteOldAndBackupDB $config.Backup_Path_Dairly $config.DaysKeepBackupDairly $config.ExtensionBackup }
+		"Historical" { DeleteOldAndBackupDB $config.Backup_Path_Historic $config.DaysKeepBackupHistoric $config.ExtensionBackup }
 	}
 }
 catch {
