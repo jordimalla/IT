@@ -10,7 +10,7 @@ function Write-LogMessage() {
 		[Parameter(Mandatory=$true, Position=0)]
 		[string]$tag,
 		[Parameter(Mandatory=$true, Position=1)]
-        [string]$message
+        	[string]$message
 	)
 	if($global:config.Debug_Log)
 	{
@@ -26,19 +26,19 @@ function Start-Logging() {
 		[Parameter(Mandatory=$true, Position=0)]
 		[string]$logFile
 	)
-    if($global:config.Debug_Log)
-    {
-        $date = Get-Date -format "yyyyMMdd-HHmmss"
-	    $fileName = "$date.log"
-        $path = $global:config.Path_Log
-	    $pathFile = "$path\$fileName"
-        try {
-            Start-Transcript -path $logFile -force -append 
-            Write-Info "Transcript is being logged to $pathFile"
-        } catch [Exception] {
-            Write-Err "Transcript is already being logged to $pathFile"
-        }
-    }
+	if($global:config.Debug_Log)
+	{
+		$date = Get-Date -format "yyyyMMdd-HHmmss"
+	    	$fileName = "$date.log"
+		$path = $global:config.Path_Log
+	    	$pathFile = "$path\$fileName"
+		try {
+			Start-Transcript -path $logFile -force -append 
+			Write-Info "Transcript is being logged to $pathFile"
+		} catch [Exception] {
+			 Write-Err "Transcript is already being logged to $pathFile"
+		}
+	}
 }
 
 function Write-Info() {
@@ -46,10 +46,10 @@ function Write-Info() {
 	Param
 	(
 		[Parameter(Mandatory=$true, Position=0)]
-        [string]$message
+        	[string]$message
 	)
 	
-    Write-LogMessage -Tag "Info" -Message $message
+	Write-LogMessage -Tag "Info" -Message $message
 }
 
 function Write-Err() {
@@ -57,7 +57,7 @@ function Write-Err() {
 	Param
 	(
 		[Parameter(Mandatory=$true, Position=0)]
-        [string]$message
+        	[string]$message
 	)
 
 	Write-LogMessage -Tag "Error" -Message $message
