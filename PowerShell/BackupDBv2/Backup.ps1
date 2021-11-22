@@ -29,25 +29,25 @@ function DeleteOld(){
 		[Parameter(Mandatory=$true, Position=2)]
         	[string]$Extension
 	)
-    	Write-Info "Start delete old files"
     	Set-Location $targetpath\
 	$Now = Get-Date
 	$LastWrite = $Now.AddDays(-$days)
+	Write-Info "    Today is $Now and days must keep are $days. We will delete the files older than $LastWrite"
 	#----- get files based on lastwrite filter in the specified folder ---#
 	#----- Remove the write-host line from the below code if you want to schedule it using SQL Agent Job ---#
     	$Files = (Get-ChildItem -Path $targetpath -Recurse -Force | Where {$_.LastWriteTime -le "$LastWrite"})
+	Write-Info "    $Files.Count files will be deleted."
 	foreach ($File in $Files) {
 		if ($File -ne $NULL) {
-			Write-Info "Deleting File $File"
+			Write-Info "    Deleting File $File"
 			Remove-Item $File.FullName | out-null
-		    	Write-Info "Deleted File $File"
+		    	Write-Info "    Deleted File $File"
 		}
 		else {
-			Write-Info "No files to delete!"
+			Write-Info "    No files to delete!"
         	}
     	}
 	Set-Location $PSScriptRoot
-	Write-Info "Finished delete old files"
 }
 
 function Move-Backups() {
@@ -84,12 +84,12 @@ function BackupAllUserDBsFromLocalServer(){
 		$date = Get-Date -format "yyyyMMddHHmmss"
 		$dbName = $database.Name
 		$fileBackupName = "$dbName-$date.$Extension"
-		Write-Info "Start Backup $dbName"
+		Write-Info "#### Start Backup $dbName into $tempPath\$fileBackupName"
 		Backup-SqlDatabase -ServerInstance $SQLServer -Database $dbName -BackupFile "$tempPath\$fileBackupName"
-		Write-Info "Finish Backup $dbName"
-		Write-Info "Start moving $dbName"
+		Write-Info "#### Finish Backup $dbName"
+		Write-Info "#### Start moving $dbName"
 		Move-Backups $targetpath
-		Write-Info "Finish moving $dbName"
+		Write-Info "#### Finish moving $dbName"
 	}
 }
 
@@ -104,12 +104,12 @@ function DeleteOldAndBackupDB{
 		[string]$Extension
 	)
 
-	Write-Info "Start backup all DBs"
+	Write-Info "### Start backup all DBs"
 	BackupAllUserDBsFromLocalServer $targetpath
-	Write-Info "Finished backup all DBs"
-	Write-Info "Start deleting old DBs"
+	Write-Info "### Finished backup all DBs"
+	Write-Info "### Start deleting old DBs on $targetpath"
 	DeleteOld $targetpath $days $Extension
-	Write-Info "Finished deleting old DBs"
+	Write-Info "### Finished deleting old DBs"
 }
 #endregion
 
@@ -195,7 +195,7 @@ function Clean-OldLogging() {
 		[Parameter(Mandatory=$true, Position=1)]
 		[int]$days
 	)
-	Write-Info "Start delete old files"
+	Write-Info "## Start delete old log files"
 	Set-Location $logPath\
 	$Now = Get-Date
 	$LastWrite = $Now.AddDays(-$days)
@@ -204,16 +204,16 @@ function Clean-OldLogging() {
 	$Files = (Get-ChildItem -Path $logPath -Recurse -Force | Where {$_.LastWriteTime -le "$LastWrite"})
 	foreach ($File in $Files) {
 		if ($File -ne $NULL) {
-			Write-Info "Deleting File $File"
+			Write-Info "   Deleting File $File"
 			Remove-Item $File.FullName | out-null
-			Write-Info "Deleted File $File"
+			Write-Info "   Deleted File $File"
 		}
 		else {
-			Write-Info "No files to delete!"
+			Write-Info "   No files to delete!"
 		}
 	}
 	Set-Location $PSScriptRoot
-	Write-Info "Finished delete old files"
+	Write-Info "## Finished delete old log files"
 }
 
 #region Logging
@@ -223,7 +223,7 @@ if($global:config.Debug_Log) {
 Clean-OldLogging $global:config.Path_Log $global:config.DaysKeepLogFiles
 #endregion
 
-Write-Info "Process starts"
+Write-Info "## Process backup $type starts"
 $BackupState = "Ok"
 try {
 	switch ($type){
@@ -237,11 +237,13 @@ catch {
 	Write-Err $_
 }
 
-Write-Info "Teams message start"
+Write-Info "## End process backup $type"
+Write-Info "## Teams message start to Webhook = $config.Webhook"
 try {
 	Send-TeamsMessage $config.Webhook $BackupState $type $config.proxy
-	Write-Info "Teams message sended"
+	Write-Info "   Teams message sended"
 }
 catch {
 	Write-Err $_
 }
+Write-Info "## End Teams message"
