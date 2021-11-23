@@ -36,7 +36,8 @@ function DeleteOld(){
 	#----- get files based on lastwrite filter in the specified folder ---#
 	#----- Remove the write-host line from the below code if you want to schedule it using SQL Agent Job ---#
     	$Files = (Get-ChildItem -Path $targetpath -Recurse -Force | Where {$_.LastWriteTime -le "$LastWrite"})
-	Write-Info "    $Files.Count files will be deleted."
+	$NumFiles = $Files.Count
+	Write-Info "    $NumFiles files will be deleted."
 	foreach ($File in $Files) {
 		if ($File -ne $NULL) {
 			Write-Info "    Deleting File $File"
@@ -87,7 +88,7 @@ function BackupAllUserDBsFromLocalServer(){
 		Write-Info "#### Start Backup $dbName into $tempPath\$fileBackupName"
 		Backup-SqlDatabase -ServerInstance $SQLServer -Database $dbName -BackupFile "$tempPath\$fileBackupName"
 		Write-Info "#### Finish Backup $dbName"
-		Write-Info "#### Start moving $dbName"
+		Write-Info "#### Start moving $dbName to $targetpath"
 		Move-Backups $targetpath
 		Write-Info "#### Finish moving $dbName"
 	}
@@ -238,7 +239,8 @@ catch {
 }
 
 Write-Info "## End process backup $type"
-Write-Info "## Teams message start to Webhook = $config.Webhook"
+$Webhook = $config.Webhook
+Write-Info "## Teams message start to Webhook = $Webhook"
 try {
 	Send-TeamsMessage $config.Webhook $BackupState $type $config.proxy
 	Write-Info "   Teams message sended"
