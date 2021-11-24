@@ -1,0 +1,8 @@
+{
+  "Debug_Log": false,
+  "Path_Log": "Unit:\\PATH\\EXECUTION_LOGS",
+  "LastWritenDateToDelete": "01/01/2000",
+  "LastCreateDateToDelete": "01/01/1998",
+  "DaysKeepLogFiles": 10,
+  "Path_MovLog": "UNIT:\\PATH\ROBOCOPY_RESULT"
+}
