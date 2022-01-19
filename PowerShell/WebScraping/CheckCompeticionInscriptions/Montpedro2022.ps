@@ -166,10 +166,18 @@ Write-Host "La Seroneta Total: $($seroneta.Count)"
 Write-Host "----------------------------------------------"
 #Write-Host "Seroneta-Corrent: $($seronetaCorrent.Count)"
 #Write-Host "Seroneta-Caminant: $($seronetaCaminant.Count)"
-15Write-Host "=============================================="
+Write-Host "=============================================="
 Write-Host "=============================================="
 Write-Host "Dorsal 0"
 Write-Host "=============================================="
 foreach ($i in $dorsal0Group) {
 	Write-Host "$($i.Name) = $($i.Count)"
+}
+Write-Host "=============================================="
+Write-Host "Socis"
+foreach ($soci in $roiaSocis) {
+    Write-Host "$($soci.Cognoms), $($soci.Nom) - 28K"
+}
+Foreach ($soci in $montpedroSocis) {
+    Write-Host "$($soci.Cognoms), $($soci.Nom) - 19K"
 }
